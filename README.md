@@ -34,8 +34,8 @@ The main entities that exist in the database are:
   * Experiments
   * Executions
   * Docker Images
-
-```json
+  
+```javascript
 [
     "__OBJECTS__": {
 	// this is where the actual objects would be stored, the
