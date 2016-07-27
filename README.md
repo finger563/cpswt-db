@@ -35,6 +35,21 @@ The main entities that exist in the database are:
   * Executions
   * Docker Images
   
+Every object in the database is referenced by a unique ID (GUID). This
+GUID is the primary method by which an object is indexed for look up
+and storage. No subsystem but the databased and its proxy are allowed
+to create GUIDs.
+
+For the relevant entities, the versions of the entity are tracked and
+stored as separate objects.  Other objects which are compatible with
+only specific versions of those entities can specify their references
+using version matching of the form `^2.X.X`, to specify a range within
+the major version `2`, or can reference a specific version. Note that
+not all entities within the database require versioning or multiple
+versions. The versions of an object are all stored under the same
+GUID, to maintain consistency; the versions differ only in their
+actual data and the verion numbers.
+
 ```javascript
 [
     "__OBJECTS__": {
