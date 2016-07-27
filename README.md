@@ -19,7 +19,7 @@ this proxy are also defined in this repository.
 ## Database Design
 
 The design of the database can be found in
-[example.json](./src/example.json), which has been copied below for
+[example](./src/example.js), which has been copied below for
 ease of reading / reference.
 
 The main entities that exist in the database are:
