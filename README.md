@@ -318,11 +318,44 @@ actual data and the verion numbers.
 
 ## Database Proxy Interface
 
+The proxy wraps the database for interfacing with the subsystems. No
+other processes are allowed to write directly to the database, all
+their information must go through the proxy for conversion and
+sanitization. The proxy is responsible with generation of the
+GUIDs/UUIDs used to identify objects throughout all projects. The
+subsystems request creation of new objects, transfer of objects, or
+retrieval of objects based on GUIDs.
+
 ## Project Management Subsystem
+
+This subsystem is responsible for creating the CPSWT projects, users,
+and organizations. Additionally, it is responsible for the sharing of
+resources between these projects, users, and organizations.
 
 ## Modeling Subsystem
 
+The modeling subsystem provides the user interface for creating
+federates, interactions, coas, federations, and experiments within a
+vulcan CPSWT project. The modeling subsystem interfaces with the
+project management subsystem and the database proxy interface to
+ensure that each of the newly created model objects gets properly
+represented as a new (or new version of an) object in the
+database. Additionally, the modeling subsystem must provide an
+interface for selecting which shared resources should be included in
+the users' project. These shared resources are provided by a call into
+the project management subsystem.
+
 ## Build Subsystem
+
+The build subsystem provides the creation, management, logging, and
+interfacing for any of the build jobs currently running for the CPSWT
+projects in its vulcan project. The build system monitors for selct
+changes (e.g. new code committed to project code repository) in the
+database (though interface of the proxy) and when these change events
+happen it schedules the build jobs related to the change. While the
+build is running it stores and updates the status in the database
+finalizing it with the final status of the bulid and the location of
+the build artifacts (if any).
 
 ## Experiment Configuration Subsystem
 
