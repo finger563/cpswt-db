@@ -359,4 +359,21 @@ the build artifacts (if any).
 
 ## Experiment Configuration Subsystem
 
+The experiment subsystem provides the user front-end for configuring
+which experiments to run, what their configuraiont parameters are, and
+viewing the status of the currently scheduled/running/finished
+experimetns is. Additionally, the experiment configuration subsystem
+is (possibly) responsible for providing some measure of control over
+the experiments to the users (e.g. stop, pause, reset, restore, save).
+
 ## Execution Subsystem
+
+The execution subsystem takes in the experiment configurations that
+have been pushed into the database and queues them up for execution on
+the execution platform. The execution subsystem is responsible for
+ensuring the resource requirements of the experiments can be met, and
+delays their execution until such a time that the requirements can be
+met. When an experiment is finished, it is the execution subsystem's
+job to take the relevant output data (logs, etc.) store them in a
+versioned repository, and then update the database with the status of
+the executions.
