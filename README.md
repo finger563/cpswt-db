@@ -11,10 +11,10 @@ used by the modeling subsystem (WebGME), build subsystem, experiemnt
 configuration and management subsystem, execution subsystem, and
 vulcan project management and collaboration subsystem.
 
-The database will be surrounded by a proxy which restricts access to
-the repository and proivdes convenience methods for creating and
-sharing data within and between projects. The interface methods for
-this proxy are also defined in this repository.
+The database will be surrounded by a interface which restricts access
+to the repository and proivdes convenience methods for creating and
+sharing data within and between projects. The interface's methods are
+also defined in this repository.
 
 ## Database Design
 
@@ -37,7 +37,7 @@ The main entities that exist in the database are:
   
 Every object in the database is referenced by a unique ID (GUID). This
 GUID is the primary method by which an object is indexed for look up
-and storage. No subsystem but the databased and its proxy are allowed
+and storage. No subsystem but the databased and its interface are allowed
 to create GUIDs.
 
 For the relevant entities, the versions of the entity are tracked and
@@ -316,15 +316,41 @@ actual data and the verion numbers.
 ]
 ```
 
-## Database Proxy Interface
+## Database Interface
 
-The proxy wraps the database for interfacing with the subsystems. No
+The interface wraps the database for interfacing with the subsystems. No
 other processes are allowed to write directly to the database, all
-their information must go through the proxy for conversion and
-sanitization. The proxy is responsible with generation of the
+their information must go through the interface for conversion and
+sanitization. The interface is responsible with generation of the
 GUIDs/UUIDs used to identify objects throughout all projects. The
 subsystems request creation of new objects, transfer of objects, or
 retrieval of objects based on GUIDs.
+
+The interface will provide the requested object data in a consistent
+manner, formatted as JSON. The subsystems which receive these data can
+select the relevant keys and data they require from the object
+collection data. Finally, this JSON specification and database
+interface allow the subsystems to be relatively independent of each
+other, and not be strongly coupled to the other subsystems; i.e. two
+subsystems which must pass data between each other or trigger each
+other are not tightly coupled and do not need to specify and implement
+their own interfacing logic; instead they communicate with the
+database and request that the database trigger them when relevant data
+has been updated. Using this interaction paradigm, the subsystems can
+be swapped out transparently to the rest of the system if for instance
+the build or execution subsystems were needing to be replaced.
+
+The main functions of the database interface are
+  * Object data retrieval
+  * Object data creation
+  * Object data update
+  * Object data removal
+  * External entity (subsystem) notification upon data event filters
+
+The events on the database that the interface can generate are
+  * A new object of a specific type has been created
+  * An existing object of a specific type has been updated
+  * An existing object of a specific type has been removed
 
 ## Project Management Subsystem
 
@@ -332,12 +358,29 @@ This subsystem is responsible for creating the CPSWT projects, users,
 and organizations. Additionally, it is responsible for the sharing of
 resources between these projects, users, and organizations.
 
+The main functions of the project management subsystem are
+  * User/Organization creation
+  * User/Organization authentication
+  * User/Organization removal
+  * User/Organization authorization (w.r.t. Vulcan Projects)
+  * Vulcan Project creation
+  * Vulcan Project deletion
+  * Project object/data sharing
+
+The events on the database that the project management subsystem listens for are
+  * User/Organization creation
+  * User/Organization update
+  * User/Organization removal
+  * Project creation
+  * Proejct update
+  * Project removal
+
 ## Modeling Subsystem
 
 The modeling subsystem provides the user interface for creating
 federates, interactions, coas, federations, and experiments within a
 vulcan CPSWT project. The modeling subsystem interfaces with the
-project management subsystem and the database proxy interface to
+project management subsystem and the database interface to
 ensure that each of the newly created model objects gets properly
 represented as a new (or new version of an) object in the
 database. Additionally, the modeling subsystem must provide an
@@ -345,13 +388,38 @@ interface for selecting which shared resources should be included in
 the users' project. These shared resources are provided by a call into
 the project management subsystem.
 
+The main functions of the modeling subsystem are
+  * Graphical display of project objects/data
+  * Creation of new project objects/data
+  
+The events on the database that the modeling susbystem listens for are
+  * 
+  
+## Repository Subystem
+
+The repository subsystem is responsible for creating and managing the
+code and repositories associated with relevant objects in the database
+(e.g. federates). For example, when the modeling subsystem requests to
+the database interface to create a new Federate (and its associated
+data), the repsoitory subsystem will be notified (since there was a
+federate creation/modification/removal event) and will retrieve the
+data about the newly created federate. If needed, the repository
+subsystem will verify any required data within the federate (ensure
+its existence) before creating the repository. When the repository has
+been created, the repository subsystem will push the information about
+the newly created repository to the database and link it to the
+federate.
+
+The main functions of the repository subsystem are
+  * 
+
 ## Build Subsystem
 
 The build subsystem provides the creation, management, logging, and
 interfacing for any of the build jobs currently running for the CPSWT
 projects in its vulcan project. The build system monitors for selct
 changes (e.g. new code committed to project code repository) in the
-database (though interface of the proxy) and when these change events
+database (though interface) and when these change events
 happen it schedules the build jobs related to the change. While the
 build is running it stores and updates the status in the database
 finalizing it with the final status of the bulid and the location of
