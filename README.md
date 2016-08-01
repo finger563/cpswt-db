@@ -16,6 +16,22 @@ to the repository and proivdes convenience methods for creating and
 sharing data within and between projects. The interface's methods are
 also defined in this repository.
 
+## Unresolved Questions
+
+1. How will data (not attributes) be passed around between the
+subsystems and the database? Esp. for larger data like filesystems
+(folders/files) and binary executables? Will the database support
+things like WebGME's blob client?
+
+1. How do we properly link databases together when objects are being
+shared across projects? Where is the actual data residing and how can
+we keep synchronization and copy issues to a minimum? Do we need one
+single centralized database? If so, we would need to have very
+fine-grained filters to ensure that the subsystems don't get other
+projects' data. Conversely, how many subsystem instances will we have?
+Do we need to separate out and have instances of all the subsystems
+for each of the projects/users/organizations?
+
 ## Database Design
 
 The design of the database can be found in
@@ -358,15 +374,6 @@ This subsystem is responsible for creating the CPSWT projects, users,
 and organizations. Additionally, it is responsible for the sharing of
 resources between these projects, users, and organizations.
 
-How do we properly link databases together when objects are being
-shared across projects? Where is the actual data residing and how can
-we keep synchronization and copy issues to a minimum? Do we need one
-single centralized database? If so, we would need to have very
-fine-grained filters to ensure that the subsystems don't get other
-projects' data. Conversely, how many subsystem instances will we have?
-Do we need to separate out and have instances of all the subsystems
-for each of the projects/users/organizations?
-
 Functions:
   * User/Organization creation
   * User/Organization authentication
@@ -447,7 +454,11 @@ finalizing it with the final status of the bulid and the location of
 the build artifacts (if any).
 
 Functions:
-  *
+  * Start a build job
+  * Report build job status
+  * Clean up a build job
+  * Halt a build job
+  * 
   
 Triggering Events:
   *
