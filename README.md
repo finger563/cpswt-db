@@ -482,6 +482,7 @@ Functions:
   * Stage experiment configuration for execution
   * Retrieve status of federate build
   * Retrieve status of experiment execution
+  * Communicate with Federation Manager (start/pause/checkpoint/resume/stop)
   
 Triggering Events:
   * Build job started
@@ -509,8 +510,13 @@ versioned repository, and then update the database with the status of
 the executions.
 
 Functions:
-  *
+  * Validate execution resource requirements
+  * Schedule / Queue execution
+  * Monitor execution
+  * Tear down execution
+  * Retrieve execution data (logs, etc.)
   
 Triggering Events:
-  *
+  * Execution created
+  * Execution removed
 
