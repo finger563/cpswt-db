@@ -358,6 +358,15 @@ This subsystem is responsible for creating the CPSWT projects, users,
 and organizations. Additionally, it is responsible for the sharing of
 resources between these projects, users, and organizations.
 
+How do we properly link databases together when objects are being
+shared across projects? Where is the actual data residing and how can
+we keep synchronization and copy issues to a minimum? Do we need one
+single centralized database? If so, we would need to have very
+fine-grained filters to ensure that the subsystems don't get other
+projects' data. Conversely, how many subsystem instances will we have?
+Do we need to separate out and have instances of all the subsystems
+for each of the projects/users/organizations?
+
 Functions:
   * User/Organization creation
   * User/Organization authentication
