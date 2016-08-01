@@ -340,14 +340,14 @@ has been updated. Using this interaction paradigm, the subsystems can
 be swapped out transparently to the rest of the system if for instance
 the build or execution subsystems were needing to be replaced.
 
-The main functions of the database interface are
+Functions:
   * Object data retrieval
   * Object data creation
   * Object data update
   * Object data removal
   * External entity (subsystem) notification upon data event filters
 
-The events on the database that the interface can generate are
+Generated Events:
   * A new object of a specific type has been created
   * An existing object of a specific type has been updated
   * An existing object of a specific type has been removed
@@ -358,7 +358,7 @@ This subsystem is responsible for creating the CPSWT projects, users,
 and organizations. Additionally, it is responsible for the sharing of
 resources between these projects, users, and organizations.
 
-The main functions of the project management subsystem are
+Functions:
   * User/Organization creation
   * User/Organization authentication
   * User/Organization removal
@@ -367,7 +367,7 @@ The main functions of the project management subsystem are
   * Vulcan Project deletion
   * Project object/data sharing
 
-The events on the database that the project management subsystem listens for are
+Triggering Events:
   * User/Organization creation
   * User/Organization update
   * User/Organization removal
@@ -388,12 +388,14 @@ interface for selecting which shared resources should be included in
 the users' project. These shared resources are provided by a call into
 the project management subsystem.
 
-The main functions of the modeling subsystem are
+Functions:
   * Graphical display of project objects/data
   * Creation of new project objects/data
   
-The events on the database that the modeling susbystem listens for are
-  * 
+Triggering Events:
+  * Federate/Interaction/COA/Experiment creation
+  * Federate/Interaction/COA/Experiment update
+  * Federate/Interaction/COA/Experiment removal
   
 ## Repository Subystem
 
@@ -410,8 +412,18 @@ been created, the repository subsystem will push the information about
 the newly created repository to the database and link it to the
 federate.
 
-The main functions of the repository subsystem are
-  * 
+Functions:
+  * Configure storage location for new repositories
+  * Configure authentication for new repositories
+  * Create new repository
+  * Update/Commit/Push to new repository
+  * Pull changes from repository
+  * Remove repository
+  
+Triggering Events:
+  * Federate creation
+  * Federate update
+  * Federate removal
 
 ## Build Subsystem
 
@@ -425,6 +437,12 @@ build is running it stores and updates the status in the database
 finalizing it with the final status of the bulid and the location of
 the build artifacts (if any).
 
+Functions:
+  *
+  
+Triggering Events:
+  *
+
 ## Experiment Configuration Subsystem
 
 The experiment subsystem provides the user front-end for configuring
@@ -433,6 +451,12 @@ viewing the status of the currently scheduled/running/finished
 experimetns is. Additionally, the experiment configuration subsystem
 is (possibly) responsible for providing some measure of control over
 the experiments to the users (e.g. stop, pause, reset, restore, save).
+
+Functions:
+  *
+  
+Triggering Events:
+  *
 
 ## Execution Subsystem
 
@@ -445,3 +469,10 @@ met. When an experiment is finished, it is the execution subsystem's
 job to take the relevant output data (logs, etc.) store them in a
 versioned repository, and then update the database with the status of
 the executions.
+
+Functions:
+  *
+  
+Triggering Events:
+  *
+
