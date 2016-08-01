@@ -454,14 +454,17 @@ finalizing it with the final status of the bulid and the location of
 the build artifacts (if any).
 
 Functions:
+  * Register a new repository for building
+  * Unregister a repository
   * Start a build job
   * Report build job status
   * Clean up a build job
   * Halt a build job
-  * 
   
 Triggering Events:
-  *
+  * Repository Created
+  * Repository Committed
+  * Repository Removed
 
 ## Experiment Configuration Subsystem
 
@@ -473,10 +476,25 @@ is (possibly) responsible for providing some measure of control over
 the experiments to the users (e.g. stop, pause, reset, restore, save).
 
 Functions:
-  *
+  * Create experiment configuration
+  * Update experiemnt configuration
+  * Remove experiment configuration
+  * Stage experiment configuration for execution
+  * Retrieve status of federate build
+  * Retrieve status of experiment execution
   
 Triggering Events:
-  *
+  * Build job started
+  * Build job updated
+  * Build job completed
+  * Build job stopped
+  * Build job removed
+  * Federate/COA/Experiment created
+  * Federate/COA/Experiment updated
+  * Federate/COA/Experiment removed
+  * Execution created
+  * Execution updated
+  * Execution removed
 
 ## Execution Subsystem
 
