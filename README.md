@@ -19,18 +19,38 @@ also defined in this repository.
 ## Unresolved Questions
 
 1. How will data (not attributes) be passed around between the
-subsystems and the database? Esp. for larger data like filesystems
-(folders/files) and binary executables? Will the database support
-things like WebGME's blob client?
+   subsystems and the database? Esp. for larger data like filesystems
+   (folders/files) and binary executables? Will the database support
+   things like WebGME's blob client? This will be important because we
+   have (currently) the WebGME/Modeling subsystem creating the
+   artifacts (e.g. code for a federate) and then requesting that those
+   artifacts be placed into a repository (by the repository subsystem)
+   and built (by the build subsystem). Perhaps the code generation
+   should be tied as a plug-in to the filesystem / repository
+   subsystem which is actually responsible for managing the files and
+   their versioning? Do the generators require extra data which is
+   currently not in the database?  What is a good architecture for
+   managing these subsystems in a way that keeps them loosely coupled
+   but provides this kind of capacity?
 
 1. How do we properly link databases together when objects are being
-shared across projects? Where is the actual data residing and how can
-we keep synchronization and copy issues to a minimum? Do we need one
-single centralized database? If so, we would need to have very
-fine-grained filters to ensure that the subsystems don't get other
-projects' data. Conversely, how many subsystem instances will we have?
-Do we need to separate out and have instances of all the subsystems
-for each of the projects/users/organizations?
+   shared across projects? Where is the actual data residing and how
+   can we keep synchronization and copy issues to a minimum? Do we
+   need one single centralized database? If so, we would need to have
+   very fine-grained filters to ensure that the subsystems don't get
+   other projects' data. Conversely, how many subsystem instances will
+   we have?  Do we need to separate out and have instances of all the
+   subsystems for each of the projects/users/organizations?
+   
+1. How do we manage authentication between many different shared
+   repositories? Esp. since users need access to this authentication
+   scheme so that they can clone and push to these repositories to
+   make their changes.
+
+1. How reliant are we / should we be on WebGME plugins right now for
+   managing many of the aspects of code generation / building?
+   Currently these steps happen through pre-programmed plug-ins inside
+   WebGME context (or are triggered by these plug-ins).
 
 ## Database Design
 
