@@ -89,73 +89,72 @@ actual data and the verion numbers.
 ```javascript
 [
     "__OBJECTS__": {
-	// this is where the actual objects would be stored, the
-	// subsequent lists at the top level would only contain GUID
-	// references.  This is the main object storage used by code
-	// accessing object members.  object members which point to
-	// other objects point using the GUID and VERSION, which they
-	// can look up in this dictionary.  The other lists that exist
-	// below are merely for querying the currently available
-	// objects (by GUID) of a certain type
-	"<GUID>": {
-	    "VERSION": {
-		"ACTUAL OBJECT HERE"
-		// for clarity, the object structures are shown below
-		// in their respective lists instead of here
-	    },
-	},
+		// this is where the actual objects would be stored, the
+		// subsequent lists at the top level would only contain GUID
+		// references.  This is the main object storage used by code
+		// accessing object members.  object members which point to
+		// other objects point using the GUID and VERSION, which they
+		// can look up in this dictionary.  The other lists that exist
+		// below are merely for querying the currently available
+		// objects (by GUID) of a certain type
+		"<GUID>": {
+			"VERSION": {
+				"ACTUAL OBJECT HERE"
+				// for clarity, the object structures are shown below
+				// in their respective lists instead of here
+			},
+		},
     },
     // These top level lists below show the structure, but again would
     // only contain GUID/VERSION references
     "projects": [
-	// which projects are currently part of this deployment?
-	// incomplete
-	{
-	    "name": ""
-	    "GUID": "",
-	    "roots": [
-		// these are the root federates visible for the
-		// current project, they are provided to the user for
-		// selecting experiments, configuring, or navigating
-		// the project.
+		// which projects are currently part of this deployment?
+		// incomplete
 		{
-		    "GUID": "",
-		    "VERSION": ""
+			"name": ""
+			"GUID": "",
+			"roots": [
+				// these are the root federates visible for the
+				// current project, they are provided to the user for
+				// selecting experiments, configuring, or navigating
+				// the project.
+				{
+					"GUID": "",
+					"VERSION": ""
+				},
+			],
 		},
-	    ],
-	},
     ],
     "Users": [
-	// Which users are currently part of this deployment?
-	// incomplete
-	{
-	    "GUID": "",
-	    "name": "",
-	    "organizations": [
+		// Which users are currently part of this deployment?
+		// incomplete
 		{
-		    "name": "",
-		    "roles": [
-		    ],
-		    "privileges": [
-		    ],
-		    "authentication": [
-		    ],
+			"GUID": "",
+			"name": "",
+			"organizations": [
+				{
+					"name": "",
+					"roles": [
+					],
+					"privileges": [
+					],
+					"authentication": [
+					],
+				},
+			],
 		},
-	    ],
-	},
     ],
     "organizations": [
-	// which organizations are currently part of this deployment?
-	// incomplete
-	{
-	    "name": "",
-	    "GUID": "",
-	    "projects": [
-	    ],
-	},
+		// which organizations are currently part of this deployment?
+		// incomplete
+		{
+			"name": "",
+			"GUID": "",
+			"projects": [
+			],
+		},
     ],
     "Federates": [
-	{
 	    // Federates are structured differently than in previous
 	    // C2WT; There is no such thing as a *Federation* anymore,
 	    // since we want to support heirarchical federations and
@@ -179,80 +178,81 @@ actual data and the verion numbers.
 	    // deployable, it is up to us to decide if we want this to
 	    // be the case or if all sub-federations are deployable
 	    // and therefore should exist in the top-level list
-	    "name": "Community1DemandController",
-	    "documentation": "",
-	    "Docker Image": "",
-	    "repository url": "http://github.com/finger563/gridlabd-federates",
-	    "type": {
-		// this is a classic style federate completely
-		// contained in the current heirarchy
-		"directly deployable",
-		// This federate exists as a proxy for one or more
-		// federates
-		"deploy by proxy",
-		// children may be deployable
-		"not directly deployable"
-	    },
-	    "federates": [
-		// reference objects to federates specifying which
-		// version of which federate exists as a child to the
-		// current federate.
 		{
-		    "GUID": "",
-		    "VERSIONS": "^2.0.0"
-		}
-	    ],
-	    "interactions": [
-		// reference objects to interactions specifying which
-		// version of which interaction this federate uses and
-		// whether it is an input or output
-		{
-		    "guid": "",
-		    "version": "",
-		    "direction": "",
+			"name": "Community1DemandController",
+			"documentation": "",
+			"Docker Image": "",
+			"repository url": "http://github.com/finger563/gridlabd-federates",
+			"type": {
+				// this is a classic style federate completely
+				// contained in the current heirarchy
+				"directly deployable",
+				// This federate exists as a proxy for one or more
+				// federates
+				"deploy by proxy",
+				// children may be deployable
+				"not directly deployable"
+			},
+			"federates": [
+				// reference objects to federates specifying which
+				// version of which federate exists as a child to the
+				// current federate.
+				{
+					"GUID": "",
+					"VERSIONS": "^2.0.0"
+				}
+			],
+			"interactions": [
+				// reference objects to interactions specifying which
+				// version of which interaction this federate uses and
+				// whether it is an input or output
+				{
+					"guid": "",
+					"version": "",
+					"direction": "",
+				},
+			],
+			"parameters": [
+				{
+					// giving parameters GUIDS is probably not a good
+					// idea; they might have to be entirely local
+					"guid": "",
+					"version": "",
+					"direction": "",
+				},
+			],
+			"coas": [
+				// Because federates are heirarchical, all federates
+				// may have coas associated with them now; but we can
+				// further restrict this in the UI if we choose
+				{
+					"GUID": "",
+					"VERSIONS": "^2.0.0"
+				}
+			],
+			"configuration": {
+				// need type info here for the configuration data
+				"step size": "",
+				"files": [
+					"Community1DemandController.config"
+				]
+			},
+			"last build": {
+				// Reference to a build information object for this
+				// federate.  Not all federates can be built.
+				{
+					"GUID": "",
+				}
+			},
+			"experiments": [
+				// Reference to experiments to which this federate
+				// belongs
+				{
+					"GUID": "",
+					"VERSIONS": "^2.0.0"
+				}
+			],
 		},
-	    ],
-	    "parameters": [
-		{
-		    // giving parameters GUIDS is probably not a good
-		    // idea; they might have to be entirely local
-		    "guid": "",
-		    "version": "",
-		    "direction": "",
-		},
-	    ],
-	    "coas": [
-		// Because federates are heirarchical, all federates
-		// may have coas associated with them now; but we can
-		// further restrict this in the UI if we choose
-		{
-		    "GUID": "",
-		    "VERSIONS": "^2.0.0"
-		}
-	    ],
-	    "configuration": {
-		// need type info here for the configuration data
-		"step size": "",
-		"files": [
-		    "Community1DemandController.config"
-		]
-	    },
-	    "last build": {
-		// Reference to a build information object for this
-		// federate.  Not all federates can be built.
-		{
-		    "GUID": "",
-		}
-	    },
-	    "experiments": [
-		// Reference to experiments to which this federate
-		// belongs
-		{
-		    "GUID": "",
-		    "VERSIONS": "^2.0.0"
-		}
-	    ],
-	},
     ],
     "coas": [
 	// Structure of a COA
@@ -381,6 +381,8 @@ Functions:
   * Object data creation
   * Object data update
   * Object data removal
+  * Register for notification with filters
+  * Remove notification registration
   * External entity (subsystem) notification upon data event filters
 
 Generated Events:
