@@ -255,99 +255,99 @@ actual data and the verion numbers.
 		},
     ],
     "coas": [
-	// Structure of a COA
-	{
-	    "name": "",
-	    "GUID": "",
-	    "objects": [
+		// Structure of a COA
 		{
-		    "name": "",
-		    "parameters": [
-		    ],
+			"name": "",
+			"GUID": "",
+			"objects": [
+				{
+					"name": "",
+					"parameters": [
+					],
+				},
+			],
+			"parameters": [
+			],
 		},
-	    ],
-	    "parameters": [
-	    ],
-	},
     ],
     "Experiments": [
-	// Structure of an experiment
-	{
-	    "name": "TESDemo2016Exp1",
-	    "GUID": "",
-	    "parameters": [
-	    ],
-	    "coas": [
-	    ],
-	    "federates": [
-	    ],
-	    "executions": [
-		// Reference to execution objects for any scheduled or
-		// running instance of this experiment
-	    ],
-	},
+		// Structure of an experiment
+		{
+			"name": "TESDemo2016Exp1",
+			"GUID": "",
+			"parameters": [
+			],
+			"coas": [
+			],
+			"federates": [
+			],
+			"executions": [
+				// Reference to execution objects for any scheduled or
+				// running instance of this experiment
+			],
+		},
     ],
     "Interactions": [
-	// structure of an interaction
-	{
-	    "name": "",
-	    "GUID": "",
-	    "parameters": [
-	    ],
-	},
+		// structure of an interaction
+		{
+			"name": "",
+			"GUID": "",
+			"parameters": [
+			],
+		},
     ],
     "Parameters": [
-	// structure of a parameter
-	{
-	    "name": "",
-	    "GUID": "",
-	    "type": "",
-	    "editable": false,
-	    "default value": "",
-	},
+		// structure of a parameter
+		{
+			"name": "",
+			"GUID": "",
+			"type": "",
+			"editable": false,
+			"default value": "",
+		},
     ],
     "builds": [
-	// Build information created by the build system and checked
-	// by the execution engine
-	{
-	    "GUID": "",
-	    "time": "",
-	    "user": "",
-	    "project": "",
-	    "configuration": {
-		"federate": "",
-	    },
-	    "status": {
-	    },
-	    "results": {
-	    }
-	},
+		// Build information created by the build system and checked
+		// by the execution engine
+		{
+			"GUID": "",
+			"time": "",
+			"user": "",
+			"project": "",
+			"configuration": {
+				"federate": "",
+			},
+			"status": {
+			},
+			"results": {
+			}
+		},
     ],
     "executions": [
-	// What are the currently running or scheduled executions?
-	{
-	    "name": "",
-	    "GUID": "",
-	    "time": "",
-	    "user": "",
-	    "experiment": "",
-	    "configuration": [
-	    ],
-	    "status": {
-	    },
-	    "results": [
-	    ],
-	},
+		// What are the currently running or scheduled executions?
+		{
+			"name": "",
+			"GUID": "",
+			"time": "",
+			"user": "",
+			"experiment": "",
+			"configuration": [
+			],
+			"status": {
+			},
+			"results": [
+			],
+		},
     ],
     "Docker Images": [
-	// Contains the info for the docker images needed for this
-	// project.  Federates may share docker image information?
-	{
-	    "GUID": "",
-	    "name": "",
-	    "repository url": "",
-	    "tag": "",
-	},
+		// Contains the info for the docker images needed for this
+		// project.  Federates may share docker image information?
+		{
+			"GUID": "",
+			"name": "",
+			"repository url": "",
+			"tag": "",
+		},
     ],
 ]
 ```
