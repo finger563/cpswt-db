@@ -306,6 +306,16 @@ actual data and the verion numbers.
 			"default value": "",
 		},
     ],
+	"repositories": [
+		// Location of repositories and their credentials for the code
+		{
+			"name": "",
+			"GUID": "",
+			"users": [],
+			"location": "",
+			"federate": "",
+		},
+	]
     "builds": [
 		// Build information created by the build system and checked
 		// by the execution engine
