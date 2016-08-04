@@ -226,6 +226,8 @@ define(['q'], function(Q) {
 	},
 
 	transformFederate: function(obj) {
+	    // converts from the generic representation we have here
+	    // to the specific representation given in example.js
 	},
 
 	extractParameters: function(model) {
