@@ -40,9 +40,18 @@ https://github.com/rosmod/webgme-rosmod/blob/master/src/common/modelLoader.js#L1
 define(['q'], function(Q) {
     'use strict';
     return {
-	// do not modify this function (at least not much)
+	// DO NOT MODIFY THIS FUNCTION (AT LEAST NOT MUCH)
+
+	// For this use, the model node that is the root of the tree
+	// to be loaded should be of type 'RootFolder' in the CPSWT
+	// Meta
+
+	//   core: webGME core object (used in plugins)
+	//   modelNode: webGME node which is the root of the tree to
+	//              be loaded
 	loadModel: function(core, modelNode) {
 	    var self = this;
+	    self.core = core;  // so that other functions can use core if they want
 	    var modelObjects = [];   // used to store the objects for handling pointers
 
 	    var nodeName = core.getAttribute(modelNode, 'name'),
@@ -237,8 +246,31 @@ define(['q'], function(Q) {
 	},
 
 	buildFederateTree: function(model) {
-	    // to iterate through we need to know exactly what the
-	    // META is
+	    var self = this;
+	    // to iterate through the model we need to know exactly
+	    // what the META is
+	    
+	    // iterate through all the FOM Sheets in the root node
+	    model.FOMSheet_list.map(function(FOMSheetInfo) {
+		// Need to go through all children of the FOMSheet
+		// which are federates, should refactor a little so
+		// that there is just a single Federate_list which
+		// contains all types of federates.  will require some
+		// further processing.
+		fedList = []
+		fedList = fedList.concat(FOMSheetInfo.Federate_list);
+		fedList = fedList.concat(FOMSheetInfo.CPNFederate_list);
+		fedList = fedList.concat(FOMSheetInfo.OmnetFederate_list);
+		fedList = fedList.concat(FOMSheetInfo.MapperFederate_list);
+		fedList = fedList.concat(FOMSheetInfo.JavaFederate_list);
+		fedList = fedList.concat(FOMSheetInfo.CppFederate_list);
+		fedList = fedList.concat(FOMSheetInfo.GridlabDFederate_list);
+		fedList.map(function(fedInfo) {
+		    newObj = transformFederate(fedInfo);
+		    newObj.GUID = generateGUID;
+		    newObj.version = generateVersion();
+		});
+	    });
 	},
 
 	transformFederate: function(obj) {
