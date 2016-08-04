@@ -1,4 +1,31 @@
+// this model loader provides a base implementation to transform
+// webgme objects into pure json objects where the root node becomes
+// the 'model', where it and each of its sub objects have the form:
+/*
+{
+    'name': '',
+    'path': '', // path of the webgme node for loading later
+    'type': '', // name of the base class of this object
+    'parentPath': '', // path of the webgme node of the parent
+    'childPaths': [], // paths of the webgme nodes of the children
+    'attributes': {}, // dictionary of attr.name -> attr.value
+    'pointers': {}, // dictionary of pointer.name -> pointer.path
+    'sets': {}, // dictionary of set.name -> array of paths
 
+    // additionally, all objects are transformed such that the
+    // attr.name, pointer.name, and set.name become keys into the
+    // object whose value is the value/object
+
+    // finally, all children are added in separate lists organized by
+    // their base / meta type, where the key to the list is
+    // "<base-type>_list"
+}
+
+Finally, the top level object contains a dictionary which maps path ->
+object, for use in easily getting an object given only it's webgme
+path, e.g. using the parentPath of an object to get the actual parent
+object.
+*/
 
 define(['q'], function(Q) {
     'use strict';
@@ -194,6 +221,11 @@ define(['q'], function(Q) {
 	},
 
 	buildFederateTree: function(model) {
+	    // to iterate through we need to know exactly what the
+	    // META is
+	},
+
+	transformFederate: function(obj) {
 	},
 
 	extractParameters: function(model) {
