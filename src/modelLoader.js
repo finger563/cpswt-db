@@ -25,11 +25,19 @@ Finally, the top level object contains a dictionary which maps path ->
 object, for use in easily getting an object given only it's webgme
 path, e.g. using the parentPath of an object to get the actual parent
 object.
+
+The two functions which produce this data strucuture are 'loadModel' and
+'resolvePointers' (which is called internally by loadModel).
+
+'processModel' is called within 'loadModel' to provide any
+transformations from this representation to whatever representation
+works best for the developer (e.g. the DB interface for CPSWT)
 */
 
 define(['q'], function(Q) {
     'use strict';
     return {
+	// do not modify this function (at least not much)
 	loadModel: function(core, modelNode) {
 	    var self = this;
 	    var modelObjects = [];   // used to store the objects for handling pointers
@@ -106,6 +114,7 @@ define(['q'], function(Q) {
 		    return self.model;
 		});
 	},
+	// probably also don't want to modify this function
 	resolvePointers: function(modelObjects) {
 	    modelObjects.map(function(obj) {
 		// Can't follow parent path: would lead to circular data structure (not stringifiable)
@@ -156,6 +165,10 @@ define(['q'], function(Q) {
 		}
 	    });
 	},
+	// ALL THE FUNCTIONS ABOVE HERE SHOULD NOT BE MODIFIED (AT
+	// LEAST NOT MUCH)
+	// ---------------------------------------------------------
+	// ALL THE FUNCTIONS BELOW HERE MUST BE MODIFIED / COMPLETED
 	processModel: function(model) {
 	    // THIS FUNCTION HANDLES CREATION OF SOME CONVENIENCE MEMBERS
 	    // FOR SELECT OBJECTS IN THE MODEL
