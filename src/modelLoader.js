@@ -105,8 +105,10 @@ define(['q'], function(Q) {
 			obj[pointer] = dst;
 		    else if (pointer != 'base' && path != null) 
 			throw new String(obj.name + ' has pointer ' +pointer+ ' to object not in the tree!');
+		    /* for CPSWT we are probably OK with null pointers
 		    else if (path == null) 
 			throw new String(obj.name + ' has null pointer ' + pointer);
+		    */
 		}
 		// follow set paths, these may not always be loaded!
 		for (var set in obj.sets) {
@@ -130,6 +132,81 @@ define(['q'], function(Q) {
 	processModel: function(model) {
 	    // THIS FUNCTION HANDLES CREATION OF SOME CONVENIENCE MEMBERS
 	    // FOR SELECT OBJECTS IN THE MODEL
+
+	    // Need to create:
+	    //  - GUIDs for all objects (for now)
+	    //  - Versions for relevant objects (for now)
+	    //  - __OBJECTS__ list
+	    //  - <type> lists of GUID references
+
+	    //  - dummy users and organizations?
+	    //  - dummmy docker images and repositories?
+
+	    // Need to convert:
+	    //  - federations to heirarchical federates
+	    //  - all objects to __OBJECTS__ notation from example.js
+	    //  - poitners to GUID references
+
+	    initTransform(model);
+	    buildFederateTree(model);
+	    extractParameters(model);
+	    extractInteractions(model);
+	    extractCOAs(model);
+	    extractExperiments(model);
+	    extractConfigurations(model);
+
+	    buildDummyObjects(model);
+
+	    // now that we've transformed the model, get rid of the
+	    // original data
+	    model = model._newModel;
+	},
+
+	initTransform: function(model) {
+	    model._newModel = [
+		"__OBJECTS__": {},
+		"projects": [],
+		"Users": [],
+		"organizations": [],
+		"Federates": [],
+		"coas": [],
+		"Experiments": [],
+		"Interactions": [],
+		"Parameters": [],
+		"repositories": [],
+		"builds": [],
+		"executions": [],
+		"Docker Images": []
+	    ]
+	},
+
+	buildFederateTree: function(model) {
+	},
+
+	extractParameters: function(model) {
+	},
+
+	extractInteractions: function(model) {
+	},
+
+	extractCOAs: function(model) {
+	},
+
+	extractExperiments: function(model) {
+	},
+
+	extractConfigurations: function(model) {
+	},
+
+	buildDummyObjects: function(model) {
+	},
+
+	generateGUID: function() {
+	    return 0; // replace
+	},
+
+	generateVersion: function(object) {
+	    return object.version + '.1';
 	},
     }
 });
