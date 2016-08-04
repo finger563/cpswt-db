@@ -32,6 +32,9 @@ The two functions which produce this data strucuture are 'loadModel' and
 'processModel' is called within 'loadModel' to provide any
 transformations from this representation to whatever representation
 works best for the developer (e.g. the DB interface for CPSWT)
+
+An example of processModel can be found here:
+https://github.com/rosmod/webgme-rosmod/blob/master/src/common/modelLoader.js#L130
 */
 
 define(['q'], function(Q) {
