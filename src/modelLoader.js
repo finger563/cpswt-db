@@ -135,19 +135,31 @@ define(['q'], function(Q) {
 
 	    // Need to create:
 	    //  - GUIDs for all objects (for now)
+	    //    - will be handled by DB intf
 	    //  - Versions for relevant objects (for now)
+	    //    - will be handled by DB intf
 	    //  - __OBJECTS__ list
+	    //    - will be handled by DB intf
 	    //  - <type> lists of GUID references
+	    //    - will be handled by DB intf
 
 	    //  - dummy users and organizations?
+	    //    - will be handled by other subsystems
 	    //  - dummmy docker images and repositories?
+	    //    - will be handled by other subsystems
 
 	    // Need to convert:
 	    //  - federations to heirarchical federates
+	    //    - actually has to be done
 	    //  - all objects to __OBJECTS__ notation from example.js
+	    //    - actually has to be done
 	    //  - poitners to GUID references
+	    //    - will have to see exactly how this works, where we
+	    //      really get GUIDs from
 
-	    initTransform(model);
+	    // for testing, need the structure that would be in the database
+	    initDB(model);
+
 	    buildFederateTree(model);
 	    extractParameters(model);
 	    extractInteractions(model);
@@ -155,15 +167,16 @@ define(['q'], function(Q) {
 	    extractExperiments(model);
 	    extractConfigurations(model);
 
+	    // for testing since we will need these other objects
 	    buildDummyObjects(model);
 
 	    // now that we've transformed the model, get rid of the
 	    // original data
-	    model = model._newModel;
+	    model = model._DB;
 	},
 
-	initTransform: function(model) {
-	    model._newModel = [
+	initDB: function(model) {
+	    model._DB = [
 		"__OBJECTS__": {},
 		"projects": [],
 		"Users": [],
